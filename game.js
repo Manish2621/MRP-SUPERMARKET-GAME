@@ -1,60 +1,78 @@
-// Initial Game State
-let inventoryCount = 0;
-let employeeCount = 0;
-let balance = 5000;
+// Game variables
+let stock = 50;
+let employees = 0;
+let balance = 100;  // Starting balance
+let employeeSalary = 50;
+let productsPerOrder = 20;
+let productPrice = 10;
 
-// DOM Elements
-const inventoryDisplay = document.getElementById('inventoryCount');
-const employeeDisplay = document.getElementById('employeeCount');
-const balanceDisplay = document.getElementById('balance');
-const orderButton = document.getElementById('orderButton');
-const hireButton = document.getElementById('hireCashierButton');
+// Elements
+const stockElement = document.getElementById('stock');
+const employeesElement = document.getElementById('employees');
+const balanceElement = document.getElementById('balance');
+const messageElement = document.getElementById('message');
+const shelvesElement = document.getElementById('shelves');
+const cashiersElement = document.getElementById('cashiers');
 
-// Event Listeners
-orderButton.addEventListener('click', orderProducts);
-hireButton.addEventListener('click', hireCashier);
+// Game actions
+document.getElementById('orderButton').addEventListener('click', orderProducts);
+document.getElementById('hireButton').addEventListener('click', hireCashier);
 
-// Order Products Logic
-function orderProducts() {
-    const orderCost = 1000; // Example cost per order
-    if (balance >= orderCost) {
-        inventoryCount += 10; // Adding 10 items per order
-        balance -= orderCost;
-        updateGameState();
-    } else {
-        alert("Not enough funds to order products!");
-    }
+// Update the displayed stats
+function updateStats() {
+  stockElement.textContent = stock;
+  employeesElement.textContent = employees;
+  balanceElement.textContent = balance;
 }
 
-// Hire Cashier Logic
+// Create a shelf with products
+function createShelf() {
+  const shelf = document.createElement('div');
+  shelf.className = 'shelf';
+  shelf.textContent = `Product ${stock}`;
+  shelvesElement.appendChild(shelf);
+}
+
+// Hire a cashier and update the system
 function hireCashier() {
-    const hireCost = 1500; // Example cost to hire one cashier
-    if (balance >= hireCost) {
-        employeeCount += 1;
-        balance -= hireCost;
-        updateGameState();
-    } else {
-        alert("Not enough funds to hire a cashier!");
-    }
+  if (balance < employeeSalary) {
+    messageElement.textContent = "Not enough balance to hire a cashier!";
+    return;
+  }
+
+  employees++;
+  balance -= employeeSalary;
+  updateStats();
+  createCashier();
+  messageElement.textContent = "Cashier hired!";
 }
 
-// Update the Game State Display
-function updateGameState() {
-    inventoryDisplay.textContent = inventoryCount;
-    employeeDisplay.textContent = employeeCount;
-    balanceDisplay.textContent = balance;
+// Create a cashier for the game
+function createCashier() {
+  const cashier = document.createElement('div');
+  cashier.className = 'cashier';
+  cashier.textContent = `Cashier ${employees}`;
+  cashiersElement.appendChild(cashier);
 }
 
-// Simple Game Loop for Real-Time Updates (every 5 seconds)
-function gameLoop() {
-    setInterval(() => {
-        // Real-time updates: Generate some profit for each employee
-        if (employeeCount > 0) {
-            balance += employeeCount * 100; // Example: Each employee generates $100 profit per cycle
-            updateGameState();
-        }
-    }, 5000); // Every 5 seconds
+// Order products and add them to the inventory
+function orderProducts() {
+  if (balance < 100) {
+    messageElement.textContent = "Not enough balance to order products!";
+    return;
+  }
+
+  stock += productsPerOrder;
+  balance -= 100;
+  updateStats();
+  messageElement.textContent = "Products ordered!";
 }
 
-// Start the game loop
-gameLoop();
+// Simulate a customer buying products
+setInterval(function () {
+  if (stock > 0 && employees > 0) {
+    stock -= 1;  // A customer buys one product
+    balance += productPrice;  // Profit from the sale
+    updateStats();
+  }
+}, 3000);  // Simulate a sale every 3 seconds
