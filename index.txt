@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermarket Management Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Supermarket Manager Game</h1>
+    </header>
+
+    <main>
+        <section id="dashboard">
+            <div id="inventory">
+                <h2>Inventory</h2>
+                <p>Items in stock: <span id="inventoryCount">0</span></p>
+                <button id="orderButton">Order Products</button>
+            </div>
+
+            <div id="employees">
+                <h2>Employees</h2>
+                <button id="hireCashierButton">Hire Cashier</button>
+                <p>Employees: <span id="employeeCount">0</span></p>
+            </div>
+
+            <div id="profits">
+                <h2>Profits</h2>
+                <p>Current Balance: $<span id="balance">5000</span></p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Supermarket Manager Game</p>
+        </footer>
+    </main>
+
+    <script src="game.js"></script>
+</body>
+</html>
