@@ -3,46 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Supermarket Manager Game</title>
-  <link rel="stylesheet" href="style.css">
+  <title>3D Supermarket Manager</title>
+  <style>
+    body { margin: 0; }
+    canvas { display: block; }
+  </style>
 </head>
 <body>
-  <div class="game-container">
-    <h1>Supermarket Manager Game</h1>
-    
-    <!-- Supermarket Layout -->
-    <div class="supermarket">
-      <div class="product-shelves">
-        <h2>Product Shelves</h2>
-        <div id="shelves">
-          <!-- Shelves will be filled dynamically -->
-        </div>
-      </div>
-      <div class="cash-registers">
-        <h2>Cash Registers</h2>
-        <div id="cashiers">
-          <!-- Cashiers will be filled dynamically -->
-        </div>
-      </div>
-    </div>
-    
-    <!-- Game Stats -->
-    <div class="stats">
-      <p>Items in Stock: <span id="stock">50</span></p>
-      <p>Employees: <span id="employees">0</span></p>
-      <p>Current Balance: $<span id="balance">0</span></p>
-    </div>
-    
-    <!-- Actions -->
-    <div class="actions">
-      <button id="orderButton">Order Products</button>
-      <button id="hireButton">Hire Cashier</button>
-    </div>
-    
-    <p id="message"></p>
-    <p>© 2025 Supermarket Manager Game</p>
+  <h1>Supermarket Manager Game (3D)</h1>
+  <div id="game-container">
+    <canvas id="gameCanvas"></canvas>
   </div>
-  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="game.js"></script>
 </body>
 </html>
